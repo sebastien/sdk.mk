@@ -127,20 +127,20 @@ $(JS_BUNDLE_ICONS_OUTPUT): $(JS_BUNDLE_ICONS_SOURCES)
 # include WASM files that get extracted as separate assets during bundling.
 $(JS_BUNDLE_OUTPUT): $(JS_BUNDLE_ENTRY) $(SOURCES_TS) $(JS_BUNDLE_ICONS_OUTPUT)
 	@$(call rule_pre_cmd)
-	@if [ -z "$(JS_BUNDLE_ENTRY)" ]; then \
+	if [ -z "$(JS_BUNDLE_ENTRY)" ]; then \
 		echo "$(call fmt_error,JS_BUNDLE_ENTRY not set. Set it to your entry point.)"; \
 		exit 1; \
 	fi
-	@mkdir -p $(dir $@)
-	$(BUN) build $(JS_BUNDLE_ENTRY) \
+	mkdir -p $(dir $@)
+	$(call shell_try,$(BUN) build $(JS_BUNDLE_ENTRY) \
 		--bundle \
 		--minify \
 		--target=browser \
 		--format=esm \
 		$(JS_BUNDLE_EXTERNAL_FLAGS) \
 		--outdir=$(dir $@) \
-		--entry-naming=$(notdir $@)
-	@if [ ! -f "$@" ]; then \
+		--entry-naming=$(notdir $@),Unable to build JavaScript bundle: $(JS_BUNDLE_ENTRY))
+	if [ ! -f "$@" ]; then \
 		echo "$(call fmt_error,Bundle output not found: $@)"; \
 		exit 1; \
 	fi
