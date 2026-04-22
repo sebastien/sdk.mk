@@ -14,7 +14,18 @@
 		},
 		"playwright": {
 			"type": "local",
-			"command": ["bun", "x", "-y", "@playwright/mcp@latest"],
+			"command": [
+				"xvfb-run",
+				"-a",
+				"env",
+				"HEADLESS=true",
+				"PLAYWRIGHT_HEADLESS=true",
+				"PW_HEADLESS=1",
+				"bun",
+				"x",
+				"-y",
+				"@playwright/mcp@latest"
+			],
 			"enabled": true
 		},
 		//"context7": {
