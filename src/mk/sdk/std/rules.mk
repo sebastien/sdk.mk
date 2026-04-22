@@ -174,7 +174,7 @@ help: ## This command
 			origin=$$(dirname $$SRC)
 			case "$$rule" in
 				*/*)
-					dev_rules+=("$(call fmt_rule,$$rule,🗅) ―$${line##*##} $(DIM)[$$origin]$(RESET)") # NOHELP
+					dev_rules+=("$(call fmt_rule,$$rule,▷) ―$${line##*##} $(DIM)[$$origin]$(RESET)") # NOHELP
 					;;
 				*)
 					main_rules+=("$(call fmt_rule,$$rule) ―$${line##*##} $(DIM)[$$origin]$(RESET)") # NOHELP

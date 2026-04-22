@@ -87,8 +87,8 @@ WWW_DIST_STATIC=\
 # BUNDLE (Standalone production build assets)
 # =============================================================================
 
-# LittleCSS compiled to static CSS (for production)
-WWW_BUNDLE_LITTLECSS?=$(PATH_DIST)/www/littlecss.css
+# UICSS compiled to static CSS (for production)
+WWW_BUNDLE_UICSS?=$(PATH_DIST)/www/ui.css
 
 # Project CSS copied to dist
 WWW_BUNDLE_CSS?=$(PATH_DIST)/www/style.css
@@ -100,7 +100,7 @@ WWW_BUNDLE_INDEX?=$(if $(JS_BUNDLE_ENTRY),$(PATH_DIST)/www/index.html)
 WWW_BUNDLE_DEBUG_INDEX?=$(if $(JS_BUNDLE_ENTRY),$(PATH_DIST)/www/index.debug.html)
 
 WWW_DIST_BUNDLE=\
-	$(WWW_BUNDLE_LITTLECSS)\
+	$(WWW_BUNDLE_UICSS)\
 	$(WWW_BUNDLE_CSS)\
 	$(WWW_BUNDLE_INDEX)\
 	$(WWW_BUNDLE_DEBUG_INDEX)

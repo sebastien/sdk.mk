@@ -75,7 +75,7 @@ $(PATH_BUILD)/css/%.css: $(PATH_SRC)/css/%.js
 	@$(call rule_pre_cmd)
 	@mkdir -p "$(dir $@)"
 	@$(call sh_check_defined,BUN)
-	@if ! $(BUN) -e "import mod from './$<';import css from '@littlecss.js';console.log([...css(mod)].join('\n'))" > "$@"; then \
+	@if ! $(BUN) -e "import mod from './$<';import css from '@uicss.js';console.log([...css(mod)].join('\n'))" > "$@"; then \
 		rm -f "$@"; \
 		exit 1; \
 	fi
@@ -185,12 +185,12 @@ $(PATH_DIST)/www/static/%: $(PATH_SRC)/static/%
 # =============================================================================
 
 # --
-# Compile LittleCSS to static CSS
-# This rule compiles LittleCSS to a static CSS file.
-$(WWW_BUNDLE_LITTLECSS): $(wildcard $(PATH_DEPS)/littlecss/src/css/*.js)
+# Compile UICSS to static CSS
+# This rule compiles UICSS to a static CSS file.
+$(WWW_BUNDLE_UICSS): $(wildcard $(PATH_DEPS)/uicss/src/css/*.js)
 	@$(call rule_pre_cmd)
 	@mkdir -p $(dir $@)
-	$(call shell_create_if,$(PATH_DEPS)/littlecss/bin/littlecss > $@,Unable to compile LittleCSS)
+	$(call shell_create_if,$(PATH_DEPS)/uicss/bin/uicss > $@,Unable to compile UICSS)
 
 # --
 # Copy project CSS to dist/www
@@ -207,9 +207,9 @@ $(WWW_BUNDLE_CSS): $(PATH_SRC)/css/style.css
 # - Remove highlight.js CDN (unused)
 # - Remove iconify CDN (bundled in JS)
 # - Update CSS paths (use ./ for portability when not served from root)
-# - Add littlecss.css and bundle script
+# - Add uicss.css and bundle script
 # This rule generates a production-ready index.html file.
-$(WWW_BUNDLE_INDEX): $(PATH_SRC)/html/index.html $(JS_BUNDLE_OUTPUT) $(WWW_BUNDLE_LITTLECSS) $(WWW_BUNDLE_CSS)
+$(WWW_BUNDLE_INDEX): $(PATH_SRC)/html/index.html $(JS_BUNDLE_OUTPUT) $(WWW_BUNDLE_UICSS) $(WWW_BUNDLE_CSS)
 	@$(call rule_pre_cmd)
 	@mkdir -p $(dir $@)
 	sed -e '/<script type="importmap">/,/<\/script>/d' \
@@ -218,21 +218,21 @@ $(WWW_BUNDLE_INDEX): $(PATH_SRC)/html/index.html $(JS_BUNDLE_OUTPUT) $(WWW_BUNDL
 	    -e 's|<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js[^"]*></script>||g' \
 	    -e 's|<script src="https://cdn.jsdelivr.net/npm/iconify-icon[^"]*></script>||g' \
 	    -e 's|<link href="/src/css/style.css"|<link href="./style.css"|' \
-	    -e 's|</head>|<link href="./littlecss.css" rel="stylesheet" type="text/css" />\n  <script type="module" src="./$(PROJECT).min.js"></script>\n  </head>|' \
+	    -e 's|</head>|<link href="./uicss.css" rel="stylesheet" type="text/css" />\n  <script type="module" src="./$(PROJECT).min.js"></script>\n  </head>|' \
 	    "$<" > "$@"
 
 # --
 # Builds standalone production bundle
 # This rule builds a standalone production bundle.
 .PHONY: www-bundle
-www-bundle: $(JS_BUNDLE_OUTPUT) $(WWW_BUNDLE_INDEX) $(WWW_BUNDLE_LITTLECSS) $(WWW_BUNDLE_CSS) ## Builds standalone production bundle
+www-bundle: $(JS_BUNDLE_OUTPUT) $(WWW_BUNDLE_INDEX) $(WWW_BUNDLE_UICSS) $(WWW_BUNDLE_CSS) ## Builds standalone production bundle
 	@$(call rule_pre_cmd)
-	$(call rule_post_cmd,$(JS_BUNDLE_OUTPUT) $(WWW_BUNDLE_INDEX) $(WWW_BUNDLE_LITTLECSS) $(WWW_BUNDLE_CSS))
+	$(call rule_post_cmd,$(JS_BUNDLE_OUTPUT) $(WWW_BUNDLE_INDEX) $(WWW_BUNDLE_UICSS) $(WWW_BUNDLE_CSS))
 
 # --
 # Generate debug index.html (references non-minified bundle)
 # This rule generates a debug index.html file.
-$(WWW_BUNDLE_DEBUG_INDEX): $(PATH_SRC)/html/index.html $(JS_BUNDLE_DEBUG_OUTPUT) $(WWW_BUNDLE_LITTLECSS) $(WWW_BUNDLE_CSS)
+$(WWW_BUNDLE_DEBUG_INDEX): $(PATH_SRC)/html/index.html $(JS_BUNDLE_DEBUG_OUTPUT) $(WWW_BUNDLE_UICSS) $(WWW_BUNDLE_CSS)
 	@$(call rule_pre_cmd)
 	@mkdir -p $(dir $@)
 	sed -e '/<script type="importmap">/,/<\/script>/d' \
@@ -241,15 +241,15 @@ $(WWW_BUNDLE_DEBUG_INDEX): $(PATH_SRC)/html/index.html $(JS_BUNDLE_DEBUG_OUTPUT)
 	    -e 's|<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js[^"]*></script>||g' \
 	    -e 's|<script src="https://cdn.jsdelivr.net/npm/iconify-icon[^"]*></script>||g' \
 	    -e 's|<link href="/src/css/style.css"|<link href="./style.css"|' \
-	    -e 's|</head>|<link href="./littlecss.css" rel="stylesheet" type="text/css" />\n  <script type="module" src="./$(PROJECT).js"></script>\n  </head>|' \
+	    -e 's|</head>|<link href="./ui.css" rel="stylesheet" type="text/css" />\n  <script type="module" src="./$(PROJECT).js"></script>\n  </head>|' \
 	    "$<" > "$@"
 
 # --
 # Builds standalone debug bundle (non-minified)
 # This rule builds a standalone debug bundle.
 .PHONY: www-bundle-debug
-www-bundle-debug: $(JS_BUNDLE_DEBUG_OUTPUT) $(WWW_BUNDLE_DEBUG_INDEX) $(WWW_BUNDLE_LITTLECSS) $(WWW_BUNDLE_CSS) ## Builds standalone debug bundle (non-minified)
+www-bundle-debug: $(JS_BUNDLE_DEBUG_OUTPUT) $(WWW_BUNDLE_DEBUG_INDEX) $(WWW_BUNDLE_UICSS) $(WWW_BUNDLE_CSS) ## Builds standalone debug bundle (non-minified)
 	@$(call rule_pre_cmd)
-	$(call rule_post_cmd,$(JS_BUNDLE_DEBUG_OUTPUT) $(WWW_BUNDLE_DEBUG_INDEX) $(WWW_BUNDLE_LITTLECSS) $(WWW_BUNDLE_CSS))
+	$(call rule_post_cmd,$(JS_BUNDLE_DEBUG_OUTPUT) $(WWW_BUNDLE_DEBUG_INDEX) $(WWW_BUNDLE_UICSS) $(WWW_BUNDLE_CSS))
 
 # EOF
