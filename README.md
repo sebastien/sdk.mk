@@ -8,11 +8,11 @@
 ```
 
 
-*LittleSDK* is a lightweight and modular SDK that can be used as the baseline
+*SDK* is a lightweight and modular SDK that can be used as the baseline
 to build, run, test, package, deploy and release projects across multiple
 languages.
 
-LittleSDK primarily relies on Make and Bash run, and is designed to be easily
+SDK primarily relies on Make and Bash run, and is designed to be easily
 extensible thanks to its modular and documented approach.
 
 ## Features
@@ -31,9 +31,9 @@ extensible thanks to its modular and documented approach.
 Crate the following `Makefile`
 
 ```
-#  LittleSDK Bootstrapping
+#  SDK Bootstrapping
 SDK_PATH=deps/sdk
-include $(if $(SDK_PATH),$(shell test ! -e "$(SDK_PATH)/setup.mk" && git clone git@github.com:littletoolkit/littlesdk.git "$(SDK_PATH)";echo "$(SDK_PATH)/setup.mk"))
+include $(if $(SDK_PATH),$(shell test ! -e "$(SDK_PATH)/setup.mk" && git clone git@github.com:sebastien/sdk.mk.git "$(SDK_PATH)";echo "$(SDK_PATH)/setup.mk"))
 # EOF -- vim: ft=make
 ```
 
@@ -51,7 +51,7 @@ and type `make prep`
 ```bash
 # Clone
 mkdir -p deps/sdk
-git clone git@github.com:littletoolkit/littlesdk.git deps/sdk
+git clone git@github.com:sebastien/sdk.mk.git deps/sdk
 # Copy the template
 cp deps/sdk/Makefile.template Makefile
 # Get started
@@ -76,8 +76,8 @@ make help
 ```
 src/
 ├── mk/                  # Makefile modules
-│   ├── littlesdk.mk      # Core module loader
-│   ├── littlesdk/        # Module definitions
+│   ├── sdk.mk            # Core module loader
+│   ├── sdk/              # Module definitions
 │   │   ├── std/          # Standard library (core functions)
 │   │   ├── py/           # Python support
 │   │   ├── js/           # JavaScript/TypeScript support
@@ -145,7 +145,7 @@ src/
 
 ## Build Lifecycle
 
-LittleSDK uses a phased build system:
+SDK uses a phased build system:
 
 1. **`prep`** — Prepare dependencies and environment
 2. **`build`** — Compile and build all outputs
@@ -173,5 +173,4 @@ LittleSDK uses a phased build system:
 - `TEST_ALL`: Test targets
 - `RUN_ALL`: Runtime dependencies
 - `DIST_ALL`: Distribution files
-
 

@@ -15,10 +15,10 @@ SDK_PATH:=$(if $(_SDK_PATH),$(_SDK_PATH),./)
 MODULES_PATH:=$(patsubst %.mk,%,$(lastword $(MAKEFILE_LIST)))
 MODULES?=$(MODULES_AVAILABLE)
 SDK_TITLE?=
-SDK_HLO?=🧰 $(BOLD)LittleSDK$(if $(SDK_TITLE), ― $(SDK_TITLE))$(RESET)
+SDK_HLO?=🧰 $(BOLD)SDK$(if $(SDK_TITLE), ― $(SDK_TITLE))$(RESET)
 SDK_LOGGING?=all
 # The prefix used in logging output
-FMT_PREFIX?=[kit]
+FMT_PREFIX?=[sdk]
 
 include $(MODULES_PATH)/std/lib.mk
 

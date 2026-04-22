@@ -1,11 +1,11 @@
 ---
 name: review-mk
-description: Review and update Makefile documentation following LittleSDK conventions.
+description: Review and update Makefile documentation following SDK conventions.
 ---
 
 ## What I do
 
-Review and update Makefile documentation, ensuring clarity, consistency, and compliance with LittleSDK conventions. I check for:
+Review and update Makefile documentation, ensuring clarity, consistency, and compliance with SDK conventions. I check for:
 
 - Proper comment formatting with `#` markers
 - Section delimiters with separator lines
@@ -29,11 +29,11 @@ Review and update Makefile documentation, ensuring clarity, consistency, and com
 - Assume technical competence (documentation is a reference, not a tutorial)
 - Use examples to illustrate usage for complex functions
 - Use fenced code blocks for all examples
-- Follow LittleSDK conventions from AGENTS.md
+- Follow SDK conventions from AGENTS.md
 
 ## Documentation Format
 
-LittleSDK Makefile conventions with markdown support.
+SDK Makefile conventions with markdown support.
 
 ### File Template
 

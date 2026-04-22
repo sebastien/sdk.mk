@@ -2,7 +2,7 @@
 
 # --
 # Color library
-if [ -z "${NOCOLOR:-}" ]; then
+if [ -z "${NOCOLOR:-}" ] && [ -n "${TERM:-}" ] && tput setaf 1 &>/dev/null; then
 	CYAN="$(tput setaf 33)"
 	BLUE_DK="$(tput setaf 27)"
 	BLUE="$(tput setaf 33)"
@@ -18,14 +18,16 @@ if [ -z "${NOCOLOR:-}" ]; then
 	RED="$(tput setaf 124)"
 	ORANGE="$(tput setaf 202)"
 	BOLD="$(tput bold)"
+	DIM="$(tput dim)"
 	REVERSE="$(tput rev)"
 	RESET="$(tput sgr0)"
-elif tput setaf 1 &>/dev/null; then
+else
 	CYAN=""
 	BLUE_DK=""
 	BLUE=""
 	BLUE_LT=""
 	GREEN=""
+	GRAY=""
 	YELLOW=""
 	GOLD=""
 	GOLD_DK=""
@@ -35,6 +37,7 @@ elif tput setaf 1 &>/dev/null; then
 	RED=""
 	ORANGE=""
 	BOLD=""
+	DIM=""
 	REVERSE=""
 	RESET=""
 fi
@@ -52,6 +55,7 @@ export PURPLE_LT
 export RED
 export ORANGE
 export BOLD
+export DIM
 export REVERSE
 export RESET
 

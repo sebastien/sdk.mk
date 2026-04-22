@@ -4,7 +4,7 @@
 #
 # -----------------------------------------------------------------------------
 
-# Example project demonstrating Python setup with LittleSDK.
+# Example project demonstrating Python setup with SDK.
 # Overrides default Python version to use 3.10.
 
 # --

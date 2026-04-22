@@ -1,11 +1,11 @@
 ---
 name: review-sh
-description: Review and update shell script documentation following LittleSDK conventions.
+description: Review and update shell script documentation following SDK conventions.
 ---
 
 ## What I do
 
-Review and update shell script documentation, ensuring clarity, consistency, and compliance with LittleSDK conventions. I check for:
+Review and update shell script documentation, ensuring clarity, consistency, and compliance with SDK conventions. I check for:
 
 - Proper shebang (`#!/usr/bin/env bash`)
 - Section delimiters with separator lines (`# -----------------------------------------------------------------------------`)
@@ -29,12 +29,12 @@ Review and update shell script documentation, ensuring clarity, consistency, and
 - Assume technical competence (documentation is a reference, not a tutorial)
 - Use examples to illustrate usage for complex functions
 - Use fenced code blocks for all examples
-- Follow LittleSDK conventions from AGENTS.md
+- Follow SDK conventions from AGENTS.md
 - Prefer `function name { }` syntax over `name() { }`
 
 ## Documentation Format
 
-LittleSDK shell script conventions with markdown support.
+SDK shell script conventions with markdown support.
 
 ### File Template
 
@@ -164,7 +164,7 @@ function ensure_dir {
 
 ### Library Usage
 
-For modular scripts using the LittleSDK library system:
+For modular scripts using the SDK library system:
 
 ```bash
 #!/usr/bin/env bash
