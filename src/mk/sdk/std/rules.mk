@@ -264,7 +264,7 @@ $(PATH_BUILD)/cli-%.task:
 define prep-link
 $(EOL)
 $(1): $(2)
-	@$$(call rule_pre_cmd)
+	@
 	if [ -d "$$<" ]; then
 		if ! mkdir -p "$$@"; then
 			echo "$(call fmt_error,[SDK] This should be a directory $(call fmt_path,$$@): unable to create it)"
@@ -274,7 +274,8 @@ $(1): $(2)
 		if [ -L "$$@" ]; then
 			unlink "$$@"
 		else
-			echo "$(call fmt_warn,[SDK] Skipping file $(call fmt_path,$$@): already exists and is not a symlink)"
+			# NOTE: Disabled
+			# echo "$(call fmt_warn,[SDK] Skipping file $(call fmt_path,$$@): already exists and is not a symlink)"
 			exit 0
 		fi
 	else

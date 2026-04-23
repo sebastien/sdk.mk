@@ -93,7 +93,7 @@ endef
 # A generic function to be used when writing a rule. This will create the
 # parent directories for build rules, and log messages for other rules.
 define rule_post_cmd
-	echo "       ⤷  $(if $1,🗅 × $(words $1) : $(BOLD)$(strip $1),Made 🖸  $(BOLD)$@$(RESET) ← ($^))$(RESET)"
+	echo "       ⤷  $(if $1,$(if $(word 10,$1),🞖 × $(words $1) : $(BOLD)$(wordlist 1,10,$1) ...$(words $(wordlist 11,999,$1)) more,🞖 × $(words $1) : $(BOLD)$(strip $1)),🞖 Made $(BOLD)$@$(RESET) ← $(if $(word 10,$^),($(wordlist 1,10,$^) $(BOLD)…$(words $(wordlist 11,999,$^))$(RESET)),($^)))$(RESET)"
 endef
 
 # -----------------------------------------------------------------------------
@@ -211,8 +211,8 @@ fmt_warn =$(COLOR_WARNING)$(FMT_PREFIX)$(RESET) $1$(RESET)
 fmt_tip   =$(call fmt_prefix)$(SPACE)👉   $1$(RESET)
 fmt_action=$(call fmt_prefix)  →  $1$(RESET)
 fmt_result=$(call fmt_prefix)  ←  $1$(RESET)
-fmt_path=🗅  $(dir $1)$(BOLD)$(notdir $1)$(RESET)
-fmt_module=🖸  $(lastword $(strip $(subst /,$(SPACE),$(dir $1))))/$(BOLD)$(notdir $1)$(RESET)
-fmt_rule=$(if $2,$2,➳)  $(BOLD)$1$(RESET)
+fmt_path=𐪓  $(dir $1)$(BOLD)$(notdir $1)$(RESET)
+fmt_module=🞐  $(lastword $(strip $(subst /,$(SPACE),$(dir $1))))/$(BOLD)$(notdir $1)$(RESET)
+fmt_rule=$(if $2,$2,🞖)  $(BOLD)$1$(RESET)
 
 # EOF
