@@ -17,11 +17,11 @@ check: $(PREP_ALL) $(CHECK_ALL) ## Runs all the checks
 	@$(call rule_post_cmd)
 
 .PHONY: fmt
-fmt: fix ## Alias to `fix`
-	@
+fmt: $(PREP_ALL) $(FMT_ALL) ## Runs all formatting and auto-fixes
+	@$(call rule_post_cmd)
 
-.PHONY: fix
-fix: $(PREP_ALL) $(FIX_ALL) ## Runs all the fixes
+.PHONY: audit
+audit: $(PREP_ALL) $(AUDIT_ALL) ## Runs all security and quality audits
 	@$(call rule_post_cmd)
 
 .PHONY: build

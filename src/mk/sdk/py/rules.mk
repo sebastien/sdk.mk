@@ -26,7 +26,7 @@ define py-auditor
 	fi
 endef
 
-define py-fixer
+define py-formatter
 	$(call use_env)
 	if [ -n "$(if $(strip $(SOURCES_PY)),PY)" ]; then
 		echo "$(call fmt_action,Fixing: $(words $(SOURCES_PY)) file(s))"
@@ -49,8 +49,8 @@ py-audit: $(SOURCES_PY)  ## Security audits Python sources
 	@$(call py-auditor)
 	$(call rule_post_cmd,$^)
 
-.PHONY: py-fix
-py-fix: $(SOURCES_PY) ## Fixes/formats Python source
+.PHONY: py-fmt
+py-fmt: $(SOURCES_PY) ## Fixes/formats Python source
 	@$(call py-linter,--fix)
 	$(call rule_post_cmd,$^)
 

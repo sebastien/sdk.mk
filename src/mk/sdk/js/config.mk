@@ -64,7 +64,7 @@ DIST_JS=\
 
 TEST_ALL+=$(if $(TESTS_JS)$(TESTS_TS),js-test)
 CHECK_ALL+=$(if $(SOURCES_JS)$(SOURCES_TS),js-check)
-FIX_ALL+=$(if $(SOURCES_JS)$(SOURCES_TS),js-fix)
+FMT_ALL+=$(if $(SOURCES_JS)$(SOURCES_TS),js-fmt)
 
 # Only add individual JS modules if DIST_MODE contains "js:module"
 DIST_ALL+=$(if $(findstring js:module,$(DIST_MODE)),$(DIST_JS))

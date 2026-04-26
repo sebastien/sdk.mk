@@ -150,7 +150,7 @@ SDK uses a phased build system:
 1. **`prep`** — Prepare dependencies and environment
 2. **`build`** — Compile and build all outputs
 3. **`check`** — Run linters, audits, and checks
-4. **`fix`** — Auto-fix formatting and linting issues
+4. **`fmt`** — Auto-fix formatting and linting issues
 5. **`test`** — Run all tests
 6. **`run`** — Run the project locally
 7. **`dist`** — Create distribution packages
@@ -169,8 +169,8 @@ SDK uses a phased build system:
 - `PREP_ALL`: Dependencies to prepare before building
 - `BUILD_ALL`: Files to build
 - `CHECK_ALL`: Checks to run
-- `FIX_ALL`: Auto-fixes to apply
+- `FMT_ALL`: Auto-fixes and formatting to apply
+- `AUDIT_ALL`: Audit targets to run
 - `TEST_ALL`: Test targets
 - `RUN_ALL`: Runtime dependencies
 - `DIST_ALL`: Distribution files
-

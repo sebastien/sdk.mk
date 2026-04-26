@@ -32,8 +32,8 @@ js-typecheck: $(SOURCES_TS) $(SOURCES_JS) ## Lints JavaScript and TypeScript sou
 	@$(call ts-linter)
 	$(call rule_post_cmd,$^)
 
-.PHONY: js-fix
-js-fix: $(SOURCES_TS) $(SOURCES_JS) ## Lints JavaScript and TypeScript sources
+.PHONY: js-fmt
+js-fmt: $(SOURCES_TS) $(SOURCES_JS) ## Lints JavaScript and TypeScript sources
 	@$(call js-linter,--fix)
 	$(call rule_post_cmd,$^)
 
