@@ -59,6 +59,7 @@ BUILD_ALL?=## Files to be built
 CHECK_ALL?=## Checks that will be run by `make check`
 FMT_ALL?=## Formatting targets that will be run by `make fmt`
 AUDIT_ALL?=## Audit targets that will be run by `make audit`
+CLEAN_ALL?=## Files and directories that will be cleaned by `make clean`
 RUN_ALL?=## Dependencies that will be met by `make run`
 TEST_ALL?=## Dependencies that will be met by `make test`
 SOURCES_ALL?=## All the source files known by the SDK

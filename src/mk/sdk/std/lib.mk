@@ -1,4 +1,4 @@
-# Core variableslib
+# Core variables
 NULL:=
 SPACE:=$(NULL) $(NULL)
 COMMA:=,
@@ -77,7 +77,7 @@ define rule_pre_cmd
 			if [ -n "$(dir $@)" ] && [ ! -e "$(dir $@)" ]; then
 				mkdir -p "$(dir $@)"
 			fi
-			echo "$(call fmt_action,Make $(call fmt_path,$@)) 🖫"
+			echo "$(call fmt_action,Make $(call fmt_path,$@)) ∷"
 		;;
 		*run*|*clean*)
 			echo "$(call fmt_action,Does $(call fmt_rule,$@)) …"
